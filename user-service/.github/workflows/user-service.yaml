@@ -3,7 +3,7 @@ name: User Service CI/CD
 on:
   push:
     branches:
-      - user-service # Trigger on pushes to the user-service branch
+      - user-service # Trigger on pushes to the user-service branch in github
 
 jobs:
   build-and-push:
