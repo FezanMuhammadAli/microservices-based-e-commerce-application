@@ -1,4 +1,23 @@
+Copy
 from flask import Flask, jsonify
+from prometheus_client import generate_latest, Counter, REGISTRY
+
+app = Flask(__name__)
+
+# Define Prometheus metrics
+REQUEST_COUNT = Counter(
+    'product_service_requests_total',
+    'Total number of requests to Product Service'
+)
+
+@app.route('/metrics')
+def metrics():
+    return generate_latest(REGISTRY)
+
+@app.route('/products')
+def get_products():
+    REQUEST_COUNT.inc()  # Increment request counter
+    return jsonify(products)
 
 app = Flask(__name__)
 
